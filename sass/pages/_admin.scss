@@ -233,12 +233,20 @@
     margin-bottom: .5rem;
 
     img {
-        width: 50%;
-        height: 50%;
+        max-width: 25vw;
+        max-height: 25vh;
         box-shadow: $shadow1;
     }
 
 }
+
+.orderButton{
+    width: 10rem;
+    height: 2.3rem;
+    margin: .2rem;
+    text-align: center;
+}
+
 
 .tabButtons {
     display: flex;

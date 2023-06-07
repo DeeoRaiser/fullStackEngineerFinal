@@ -2,10 +2,10 @@ var user = []
 var total = 0
 
 
-findCart()
+findWish()
 
 //Funcion que trae el carrito del usuario
-async function findCart() {
+async function findWish() {
     user = JSON.parse(localStorage.getItem("user"))
     art = await callApiPrivate(`/api/wish/${user._id}`,"get", user.wish)
     addCards(art.Arts)
@@ -14,8 +14,7 @@ async function findCart() {
 
 //Funcion que dibuja las card en el DOM, parametro Array de Articulos
 function addCards(arts) {
-    user = JSON.parse(localStorage.getItem("user")) || []
-
+    //user = JSON.parse(localStorage.getItem("user")) || []
     const lista = document.getElementById('cards-container')
     lista.innerHTML = ""
 
@@ -23,8 +22,8 @@ function addCards(arts) {
         const title = document.getElementById('title-h1')
         title.innerHTML = 'TUS FAVORITOS ESTA VACIO'
     }
-
     arts.forEach(art => {
+        
         const articleCard = document.createElement("article")
         articleCard.classList.add("card")
 
@@ -34,14 +33,14 @@ function addCards(arts) {
         const heartDiv = document.createElement("div")
 
         heartDiv.classList.add("card__heart")
-        heartDiv.setAttribute("id", `heart_${art.id}`)
+        heartDiv.setAttribute("id", `heart_${art._id}`)
 
 
         heartDiv.classList.add("card__heartWishOn")
 
         const heartIcon = document.createElement("i")
         heartIcon.classList.add("fa-solid", "fa-heart")
-        heartIcon.setAttribute("onclick", `addDelWish('${art.id}')`)
+        heartIcon.setAttribute("onclick", `addDelWish('${art._id}')`)
 
         heartDiv.appendChild(heartIcon)
         headerDiv.appendChild(heartDiv)
@@ -59,7 +58,7 @@ function addCards(arts) {
 
         const titleDiv = document.createElement("div")
         titleDiv.classList.add("card__title")
-        titleDiv.setAttribute("id", `title${art.id}`)
+        titleDiv.setAttribute("id", `title${art._id}`)
         titleDiv.textContent = art.title
 
         const descriptionP = document.createElement("p")
@@ -89,7 +88,7 @@ function addCards(arts) {
 
         const detailBtn = document.createElement("a")
         detailBtn.classList.add("card__btn")
-        detailBtn.setAttribute("onclick", `detailArt('${art.id}')`)
+        detailBtn.setAttribute("onclick", `detailArt('${art._id}')`)
 
         const detailText = document.createElement("p")
         detailText.classList.add("card__btnTextDet")
@@ -107,7 +106,7 @@ function addCards(arts) {
 
         const cartBtn = document.createElement("a")
         cartBtn.classList.add("card__btn-cart")
-        cartBtn.setAttribute("onclick", `addCart('${art.id}')`)
+        cartBtn.setAttribute("onclick", `addCart('${art._id}')`)
 
         const cartIcon = document.createElement("i")
         cartIcon.classList.add("fa-solid", "fa-cart-shopping")
@@ -135,19 +134,19 @@ function addCards(arts) {
 
 //Funcion que agrega o elimina el articulo de la lista de deseos
 function addDelWish(idArt) {
-    loginUser = JSON.parse(localStorage.getItem("loginUser")) || []
-    if (loginUser.length !== 0) {
-        let searchWish = loginUser.wish.includes(idArt) //Busco si el articulo ya esta en la lista
-
+    user = JSON.parse(localStorage.getItem("user")) || []
+    if (user.length !== 0) {
+        let searchWish = user.wish.includes(idArt) //Busco si el articulo ya esta en la lista
+        
         if (searchWish) {                 //si esta lo elimino
-            let index = loginUser.wish.indexOf(idArt)
-            loginUser.wish.splice(index, 1)
-
+            let index = user.wish.indexOf(idArt)
+            user.wish.splice(index, 1)
             showAlert("FAVORIO ELIMINADO !", "Se elimino el articulo de tus favoritos")
         } else {
-            loginUser.wish.push(idArt)    //si no esta lo agrego
+            user.wish.push(idArt)    //si no esta lo agrego
             showAlert("NUEVO FAVORIO !", "Se agrego el articulo a tu lista defavoritos")
         }
+        localStorage.setItem('user', JSON.stringify(user))
         //actualizo las clases del DOM para pintar los corazones
         let h = document.getElementById(`heart_${idArt}`)
         if (h.classList.contains("card__heartWishOn")) {
@@ -155,39 +154,7 @@ function addDelWish(idArt) {
         } else {
             h.classList.add("card__heartWishOn")
         }
-
-        localStorage.setItem("loginUser", JSON.stringify(loginUser))
-        document.getElementById("title" + idArt)
-        addCards(filterWish(JSON.parse(localStorage.getItem("articulos"))))
-
-        renderUserMenu(checkLogin())
+        findWish()
     }
 
 }
-
-//Envio los datos del id y la cantidad en el array wish, y obtengo el resto de los datos del array de los articulos
-function filterWish(Arts) {
-    loginUser = JSON.parse(localStorage.getItem("loginUser")) || []
-    wish = loginUser.wish
-
-    const artWish = []
-    Arts.forEach((art) => {
-
-        const find = wish.find((item) => item === parseInt(art.id))
-
-        if (find) {
-            artWish.push({
-                id: art.id,
-                title: art.title,
-                description: art.description,
-                date: art.date,
-                price: art.price,
-                currency: art.currency,
-                img: art.img,
-            });
-        }
-    });
-
-    return artWish;
-}
-

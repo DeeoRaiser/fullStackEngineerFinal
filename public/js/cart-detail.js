@@ -11,7 +11,6 @@ async function findCart() {
 
     const art = await callApiPrivate(`/api/cart`,"post", user.cart)
     
-
     console.log(art)
     addCardCart(art.Arts)
     //regenero el carrito en caso de que no haya un id valido en el localstorage lo omito

@@ -18,6 +18,9 @@ router.post('/register', userController.postUser)
 //Busqueda de usuarios por nombre
 router.get('/api/user/:name', jwtVerify, isAdmin, userController.getUserName)
 
+//Editar el Roll del usuario
+router.put('/api/user/role', jwtVerify, isAdmin, userController.updateRole)
+
 //GET - Profile
 router.get('/api/profile', jwtVerify, userController.getProfileUser)
 

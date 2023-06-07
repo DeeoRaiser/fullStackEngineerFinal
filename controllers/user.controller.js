@@ -171,7 +171,6 @@ async function updateUser(req, res) {
     }
 }
 
-
 async function updateUserImage(req, res) {
     console.log(req.body)
 
@@ -230,6 +229,28 @@ async function adminPanel(req, res) {
 }
 
 
+async function updateRole(req, res) {
+    let data = {}
+    console.log(req.body.role)
+
+    data = {
+        role: req.body.role,
+    }
+    
+    try {
+        const updatedUser = await User.findByIdAndUpdate(req.user, data, { new: true })
+        //TRUE:Si mi usuario se actualizo correctamente, me lo devuelve
+
+        if (!updatedUser) responseCreator(res, 404, 'No se encontro el usuario')
+
+        return responseCreator(res, 200, 'Usuario actualizado correctamente', { user: updatedUser })
+
+    } catch (error) {
+        console.log(error)
+        responseCreator(res, 500, error.codeName)
+    }
+}
+
 module.exports = {
     postUser,
     getUser,
@@ -241,6 +262,7 @@ module.exports = {
     updateUserImage,
     getProfileUser,
     adminPanel,
+    updateRole,
     getUserName
 
 }

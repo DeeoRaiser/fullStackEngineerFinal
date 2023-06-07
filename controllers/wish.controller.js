@@ -4,19 +4,19 @@ const User = require('../schemas/user.schema')
 
 //funcion que recive del localStorage el carrito y y devuelve los precios y las descripciones correctas, si hay articulos que no existen los elimina
 async function getWish(req, res) {
+    
     try {
         const id = req.params.id
         const user = await User.findById(id)
 
         if (user) {
-            const wish = user.wish
+            const wish = Object.values(req.query)
             const Arts = []
-
+            console.log(wish)
             await Promise.all(
                 wish.map(async (art) => {
                     try {
                         const product = await Product.findById(art)
-
                         if (product) {
                             Arts.push(product);
                         } else {

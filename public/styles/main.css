@@ -1749,9 +1749,16 @@ iframe {
   margin-bottom: 0.5rem;
 }
 .art__pic img {
-  width: 50%;
-  height: 50%;
+  max-width: 25vw;
+  max-height: 25vh;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 5px;
+}
+
+.orderButton {
+  width: 10rem;
+  height: 2.3rem;
+  margin: 0.2rem;
+  text-align: center;
 }
 
 .tabButtons {

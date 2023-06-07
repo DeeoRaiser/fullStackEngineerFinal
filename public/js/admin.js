@@ -115,14 +115,14 @@ function renderOrders(orders) {
     orderContainer.appendChild(orderStatusAmount)
     if (user.role === "ADMIN_ROLE") {
       const editButton = document.createElement('div')
-      editButton.className = 'button__ok'
+      editButton.className = 'button__ok orderButton'
       editButton.innerHTML = "Cambiar Estado"
       editButton.setAttribute('onclick', `editOrder('${order._id}')`)
       orderContainer.appendChild(editButton)
     }
 
     const viewDetail = document.createElement('div')
-    viewDetail.className = 'button__ok'
+    viewDetail.className = 'button__ok orderButton'
     viewDetail.innerHTML = "Ver Detalle"
     viewDetail.setAttribute('onclick', `viewDetail('${order._id}')`)
     viewDetail.setAttribute("id", `viewDetail${order._id}`)
@@ -859,12 +859,21 @@ async function editOrder(id) {
   idOr.value = id
 }
 
+async function editUser(id) {
+  modalUser.style.display = "flex"
+  modalUser.style.animation = "drop-modal 0.3s ease-out forwards"
+
+  let idUsr = document.getElementById("id-user")
+  idUsr.value = id
+}
+
 
 
 const formOrder = document.getElementById("order-form")
 formOrder.addEventListener("submit", async (evt) => {
-  evt.preventDefault()
-  const elements = evt.target.elements
+evt.preventDefault()
+const elements = evt.target.elements
+
 
   if (elements.orderStatus.value === 'ELIMINAR') {
     showQuestion("Quiere borrar la orden", `${elements.idOrder.value} `, async () => {
@@ -894,10 +903,19 @@ formOrder.addEventListener("submit", async (evt) => {
       showAlert("Editar orden ERROR", err, "err")
     }
   }
+  })
+
+  const formUser = document.getElementById("user-form")
+  formUser.addEventListener("submit", async (evt) => {
+    evt.preventDefault()
+    const elements = evt.target.elements 
+
+    console.log(elements)
+    let order = await callApiPrivate(`/api/user/role/${elements.idRoll.value}`, 'put')
+
+    console.log(order)
+  })
 
 
 
 
-
-
-})
