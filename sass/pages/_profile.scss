@@ -1,0 +1,182 @@
+.section-profile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.container {
+    border-radius: 10px;
+    box-shadow: $shadow0;
+}
+
+.avatar-container2{
+display: flex;
+flex-direction: column;
+align-items: center;
+}
+
+.user {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 40vw;
+    padding: 2rem;
+    border-radius: 0 0 10px 10px;
+    background-color: $color-bg-primary;
+
+    &__pic {
+        height: 150px;
+        width: 150px;
+        position: relative;
+        margin-bottom: .5rem;
+
+
+        img {
+            border-radius: 100px;
+            object-fit: cover;
+            width: 100%;
+            height: 100%;
+            box-shadow: $shadow1;
+        }
+
+
+        label {
+            position: absolute;
+            color: $color-font-ligth;
+            right: -10px;
+            top: 10px;
+            cursor: pointer;
+        }
+    }
+
+    &__title {
+        font-size: 1.2rem;
+        font-family: Arial, Helvetica, sans-serif;
+        text-transform: uppercase;
+        color: $color-font-ligth;
+        padding: 5px;
+        border-radius: 5px;
+    }
+
+    &__container {
+        position: relative;
+        background-color: $color-bg-secondary;
+        border-radius: 5px 5px 0 0;
+        padding: .3rem;
+        width: 35vw;
+
+    }
+
+    &__description {
+        font-size: 1.2rem;
+        font-family: Arial, Helvetica, sans-serif;
+        background-color: $color-font-ligth2;
+        color: $color-font-ligth;
+        text-transform: capitalize;
+        padding: .3rem;
+        border-radius: 5px;
+        width: 35vw;
+        text-align: center;
+    }
+
+    &__name,
+    &__email,
+    &__gender,
+    &__born-date,
+    &__country,
+    &__password {
+        margin-top: .6rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        box-shadow: $shadow1;
+        border-radius: 0 0 5px 5px;
+    }
+
+    &__edit {
+        position: absolute;
+        color: $color-font-ligth;
+        cursor: pointer;
+        right: 5px;
+    }
+}
+
+.user-title {
+    text-align: center;
+    border-radius: 10px 10px 0 0;
+    width: 40vw;
+    background-color: $color-bg-secondary;
+    font-size: 1.2rem;
+    font-family: Arial, Helvetica, sans-serif;
+    text-transform: uppercase;
+    color: $color-font-ligth;
+    padding: 5px;
+}
+
+
+@media screen and (max-width:800px) {
+    .user {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 99vw;
+
+        &__container {
+            width: 90vw;
+
+        }
+
+        &__description {
+            width: 99vw;
+        }
+    }
+
+    .user-title {
+        width: 90vw;
+    }
+
+}
+
+@media screen and (max-width:1000px) {
+    .user {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 70vw;
+
+        &__container {
+            width: 65vw;
+
+        }
+
+        &__description {
+            width: 65vw;
+        }
+    }
+
+    .user-title {
+        width: 70vw;
+    }
+}
+
+#email {
+    text-transform: lowercase;
+}
+
+.submit {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    &__button-cancel{
+        width: 40%;
+    }
+
+    &__button-save{
+        width: 40%;
+    }
+}
+
+
+/* -------------------------------------------- ADMIN PROFILE ----------------------------------------- */
+
+

@@ -1,0 +1,122 @@
+.section-cards{
+    display: block;
+    &__header{
+        text-transform: uppercase;
+        font-size: 2rem;
+        text-align: center;
+        background-color: $color-background;
+    }
+    &__title{
+        color: $color-font-dark;
+        font-size: 1.8rem;
+        background-color:$color-background;
+    }
+    &__subtitle{
+        color: $color-font-dark;
+        font-size: .8rem;
+        background-color:$color-background;
+        margin-bottom: .5rem;
+    }
+    &__products-count{
+        padding: .6rem;
+        font-size: .8rem;
+    }
+    &__products-search-container{
+        text-align: center;
+        background-color:$color-background;
+        padding: .5rem;
+        margin-bottom: 1rem;
+
+    }
+    &__search-title{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        color: $color-font-ligth2;
+        padding: .5rem;
+        border-bottom: 3px solid $color-bg-primary;
+    }
+    &__orderby{
+        border: none;
+        padding: .3rem;
+        outline: 1px solid $color-font-ligth2;
+        height: 1.5rem;
+    }
+
+}
+
+.product-search{
+    display:flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+
+    &__input{
+        outline: none;
+        border: 1px solid $color-bg-secondary;
+        border-radius: 5px 0 0 5px;
+        padding: .6rem;
+        width:50%;
+        color: $color-font-dark;
+        font-size: 1.2rem;
+        font-weight: 500;
+        box-shadow:0px 5px 5px 0px  #00000050;
+        background-color: $color-background;
+        padding-left: 2.6rem;
+    }
+    
+    &__btn{
+        border: 1px solid $color-bg-secondary;
+        background-color: $color-bg-secondary;
+        color: $color-background;
+        border-radius: 0 20px 20px 0;
+        padding: .6rem;
+        font-size: 1.2rem;
+        font-weight: 500;
+        box-shadow:0px 5px 5px 0px  #00000050;
+        cursor: pointer;
+    }
+
+    &__btn:hover{
+        border: 1px solid $color-bg-secondary;
+        background-color: $color-background;
+        color: $color-bg-secondary;
+
+    }
+
+    &__icon{
+        display:flex;
+        padding: .6rem;
+        font-size: 1.2rem;
+        font-weight: 500;
+        margin-right: -2.6rem;
+        z-index: 1;
+    }
+
+    /* ANIMACION LUPA */
+    .product-search__icon:hover{  
+        transition:  all .8s ease-out;
+        transform: rotate(360deg);
+    }
+}
+
+@media screen and (max-width: 600px){
+    .product-search{
+        &__input{
+            width: 100%;
+        }
+    }
+}
+
+@media screen and (max-width: 650px){
+
+    .product-search{
+        &__input{
+            width: 90%;
+            font-size: medium;
+            font-weight: 500;
+            padding-top: .8rem;
+            padding-left: 2.6rem;
+        }
+    }
+}

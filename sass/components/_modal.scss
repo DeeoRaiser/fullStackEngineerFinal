@@ -1,0 +1,265 @@
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  backdrop-filter: blur(2px);
+  z-index: 20;
+  justify-content: center;
+  align-items: center;
+  display: none;
+
+}
+
+.modal-content {
+  padding: 20px;
+  border-radius: 5px;
+  margin: auto;
+}
+
+.close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+  color: $color-font-ligth;
+  font-size: 1.4rem;
+}
+
+.form-container {
+  position: relative;
+}
+
+
+@keyframes drop-modal {
+  from {
+    transform: translateY(-100%);
+  }
+
+  to {
+    transform: translateY(0%);
+  }
+}
+
+@keyframes hide-modal {
+  from {
+    transform: translateX(0%);
+  }
+
+  to {
+    transform: translateX(-100%);
+  }
+}
+
+
+.modal-index {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  backdrop-filter: blur(2px);
+  z-index: 20;
+  justify-content: center;
+  align-items: center;
+  display: none;
+
+  &__container {
+    display: flex;
+    position: relative;
+    flex-direction: row;
+    background-color: $color-modal;
+    width: 90vw;
+    border-radius: 10px;
+    box-shadow: $shadow1;
+
+    &__close {
+      font-size: 1.8rem;
+      color: $color-font-ligth;
+      position: absolute;
+      top: 4px;
+      right: 10px;
+      text-shadow: $shadow0;
+      cursor: pointer;
+    }
+  }
+}
+
+.article {
+  padding: .8rem;
+  width: 100%;
+
+  &__name-product {
+    display: block;
+    text-align: center;
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+    margin-top: .5rem;
+    color: $color-font-ligth;
+    text-shadow: $shadow0;
+  }
+
+  &__body {
+    display: flex;
+    flex-direction: row;
+  }
+
+  &__column1 {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    align-items: center;
+  }
+
+  &__image {
+    max-width: 100%;
+    max-height: 55vh;
+    border-radius: 10px;
+    box-shadow: $shadow1;
+  }
+
+  &__column2 {
+    display: flex;
+    flex-direction: column;
+    width: 60%;
+  }
+
+  &__description {
+    color: $color-font-ligth;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    text-align: start;
+    font-size: 1rem;
+    overflow-y: scroll;
+    margin: 1rem;
+    height: 10rem;
+    border-bottom: 1px solid $color-bg-secondary;
+    border-top: 1px solid $color-bg-secondary;
+    padding: 1rem 1rem 1rem 0;
+  }
+
+  &__price{
+    color: $color-font-ligth;
+    font-size: 2rem;
+    text-align: center;
+  }
+}
+
+.cart-containter {
+  padding: 1rem;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  &__label {
+    color: $color-font-ligth;
+  }
+
+  &__qnty {
+    width: 3.5rem;
+    text-align: center;
+    padding: .5rem;
+    border: none;
+    outline-style: none;
+    font-size: 1rem;
+  }
+
+  &__del:hover,
+  &__add:hover {
+    background-color: $color-font-ligth2;
+    color: $color-font-dark;
+  }
+
+  &__del,
+  &__add {
+    color: $color-font-ligth;
+    background-color: $color-bg-secondary ;
+    padding: .5rem;
+    font-size: 1rem;
+    cursor: pointer;
+  }
+
+  &__del {
+    border-radius: 5px 0 0 5px;
+  }
+
+  &__add {
+    border-radius: 0 5px 5px 0;
+  }
+}
+
+.quantity-container {
+  display: flex;
+  flex-direction: row;
+  box-shadow: $shadow0;
+  border-radius: 5px;
+  margin-inline: .5rem;
+}
+
+/* ESTILO DEL INPUT TEXT, PARA QUITAR LAS FLECHITAS */
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+input[type=number] {
+  -moz-appearance: textfield;
+}
+/* ------------------------------------------------ */
+
+
+/* ESTILO SCROLLBAR DE LAS DESCRIPCIONES EL EL CONTENEDOR DEL MODAL */
+p::-webkit-scrollbar, .modal-index__container::-webkit-scrollbar {
+  width: var(--scroll-size, 8px);
+  height: var(--scroll-size, 8px);
+}
+p::-webkit-scrollbar-thumb, .modal-index__container::-webkit-scrollbar-thumb{
+  background-color: var(--scroll-thumb-color, $color-bg-secondary);
+  border-radius: var(--scroll-thumb-radius, var(--scroll-radius));
+  --scroll-size: 5px;
+  --scroll-radius: 5px;
+}
+
+
+
+@media screen and (max-width: 900px) {
+  .modal-index {
+    height: 100%;
+    width: 100%;
+
+    &__container{
+      height: 80%;
+      width: 90%;
+      overflow-y: scroll;
+    }
+  }
+
+  .article {
+    &__column1 {
+      width: 90%;
+    }
+    &__column2 {
+      width: 90%;
+    }
+  }
+
+  .article__body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .cart-containter {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    &__label{
+      margin-bottom: .8rem;
+    }
+    &__addCart{
+      margin: 1rem; 
+    }
+  }
+
+}

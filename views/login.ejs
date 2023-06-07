@@ -1,0 +1,38 @@
+<%- include('partials/head') %>
+<body>
+
+    <%- include('partials/header') %>
+
+    <main class="main">
+        <h1 class="titulo-h1">Login</h1>
+        <section class="section">
+        <div class="register-form">
+            <form id="login-form" class="form-container">
+                <div class="mail-container form-container__item">
+                    <label class="mail-container__label" for="email">Email</label>
+                    <input class="mail-container__input input-form" id="email" type="email" name="mail"
+                        minlength="8" maxlength="45"
+                        pattern="[a-zA-Z0-9!#$%&'*_+-]([\.]?[a-zA-Z0-9!#$%&'*_+-])+@[a-zA-Z0-9]([^@&%$\/()=?¿!.,:;]|\d)+[a-zA-Z0-9][\.][a-zA-Z]{2,4}([\.][a-zA-Z]{2})?"
+                        id="email" placeholder="example@email.com" required>
+                </div>
+                <div class="password-container form-container__item">
+                    <label class="password-container__label" for="password1">Contraseña</label>
+                    <input class="password-container__input input-form" type="password" name="password"
+                        id="password" required>
+                </div>
+
+                <div class="submit-container form-container__button">
+                    <input id="submit" class="register__button" value="Ingresar" type="submit">
+                </div>
+            </form>
+        </div>
+        </section>
+    </main>
+
+    <%- include('partials/footer') %>
+
+    <script src="/js/general.js"></script>
+    <script src="/js/alert.js"></script>
+    <script src="/js/login.js"></script>
+
+</body>

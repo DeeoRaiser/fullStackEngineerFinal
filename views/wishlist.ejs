@@ -1,0 +1,75 @@
+<%- include('partials/head') %>
+
+    <body>
+
+        <%- include('partials/header') %>
+            <main class="main">
+                <section class="section-cards">
+                    <div class="section-cards__category">
+                        <h1 ID="title-h1">
+                            LISTA DE FAVORITOS
+                        </h1>
+                    </div>
+                    <div id="cards-container" class="cards-container">
+
+                        <!-- AQUI SE CARGAN LAS CARDS! -->
+
+                    </div>
+
+                </section>
+            </main>
+
+            <!-- MODAL DESCRIPCION DE ARTICULO  -->
+            <div id="modal" class="modal-index">
+                <div class="modal-index__container">
+                    <span id="close" class="modal-index__container__close">&times;</span>
+                    <div class="article">
+                        <div id="art-Title" class="article__name-product">
+                            SONOMA V-NECK T-SHIRT POLAR MELANGE
+                        </div>
+                        <div class="article__body">
+                            <div class="article__column1">
+                                <img id="article-photo" class="article__image" src="" alt="Imagen de Producto">
+                            </div>
+                            <div class="article__column2">
+                                <p id="article-description" class="article__description">
+                                </p>
+
+                                <div id="article-price" class="article__price">
+
+                                </div>
+
+                                <div class="cart-containter">
+                                    <label class="cart-containter__label">CANTIDAD</label>
+
+                                    <div class="quantity-container">
+                                        <div class="cart-containter__del" id="del"><i class="fa-solid fa-minus"></i>
+                                        </div>
+                                        <input id="quantity" class="cart-containter__qnty" value="1" min="1" max="100"
+                                            type="number" name="quantity" readonly>
+                                        <div class="cart-containter__add" id="add"><i class="fa-solid fa-plus"></i>
+                                        </div>
+                                    </div>
+
+                                    <div id="modalAddCart" class="cart-containter__addCart button__ok">
+                                        <i class="fa-solid fa-cart-shopping"></i>
+                                        Agregar
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <%- include('partials/footer') %>
+
+            <script src="/js/general.js"></script>
+            <script src="/js/render.js"></script>
+            <script src="/js/alert.js"></script>
+            <script src="/js/wish-detail.js"></script>
+
+    </body>
+
+    </html>

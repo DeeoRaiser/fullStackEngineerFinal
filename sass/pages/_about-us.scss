@@ -1,0 +1,71 @@
+.mainAboutUs{
+    padding: 1.5rem;
+    color: $color-font-dark;
+
+    &__title{
+        font-size: 2rem;
+        text-align: center;
+        padding:.8rem;
+        font-weight: bold;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        color: $color-font-dark;
+    }
+
+    &__containerGeneral{
+        display: flex;
+        flex-direction:column;
+    }
+
+    &__container1{
+        display: flex;
+        flex-direction:row;
+    }
+
+    &__container2{
+        display: flex;
+        flex-direction:row;
+    }
+
+    &__about-us-p{
+        padding: 1rem;
+        text-align: center;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    
+    &__storeImage{
+        height: 50%;
+        width: 50%;
+        border-radius: 8px;
+        filter: grayscale(90%);
+    }
+
+    &__storeImage:hover{
+        filter: grayscale(10%);
+    }
+}
+
+
+@media screen and (max-width: 905px){
+
+.mainAboutUs{
+
+    &__container1{
+        display: flex;
+        flex-direction:column;
+    }
+
+    &__container2{
+        display: flex;
+        flex-direction:column-reverse;
+    }
+
+    &__storeImage{
+        height: 100%;
+        width:100%;
+        border-radius: 8px;
+    }
+}
+
+}
+
+

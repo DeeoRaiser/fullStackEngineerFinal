@@ -1,0 +1,211 @@
+.card {
+   /* margin: 1rem;
+   border: 0px solid $color-font-dark;
+   box-shadow: $shadow0;
+   border-radius: 5px 5px 0 0;
+   overflow: hidden;
+   max-width: 290px; */
+
+   border-radius: 5px 5px 0 0;
+   border: 0px solid $color-font-dark;
+   box-shadow: $shadow0;
+   width: 290px;
+   margin-bottom: 20px;
+   border-radius: 4px;
+   overflow: hidden;
+   margin: 1rem;
+
+   &__header {
+      height: 200px;
+      background-color: $color-font-ligth;
+      border-radius: 5px 5px 0 0;
+   }
+
+   &__heart {
+      position: relative;
+      color: $color-wish-list-off;
+      i {
+         position: absolute;
+         right: 0;
+         padding: 1rem;
+         font-size: 1.8rem;
+         text-shadow: $shadow1;
+         z-index: 2;
+      }
+   }
+
+   &__heartWishOn{
+      color: $color-wish-list-on;
+   }
+
+   &__heart:hover {
+      color: $color-wish-list-hover;
+   }
+
+   &__heart:active {
+      color: $color-wish-list-on;
+   }
+
+   &__img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      overflow: hidden;
+   }
+
+   &__img:hover {
+      box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+      transition: all 0.3s ease-out;
+      -webkit-transform: scale(1.3);
+      transform: scale(1.3);
+      overflow: visible;
+   }
+
+   &__body {
+      padding: 1rem;
+      margin-bottom: 1rem;
+
+   }
+
+   &__title {
+      text-align: center;
+      font-weight: 400;
+      font-size: 1.2rem;
+      border-bottom: 2px solid $color-font-dark;
+      height: 3.6rem;
+   }
+
+   &__description {
+      padding: 1rem 0;
+      font-size: .8rem;
+      margin-bottom: 1rem;
+      height: 3rem;
+      color: $color-font-dark;
+      overflow: hidden;
+
+      display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+   }
+
+/*    &__description:hover {
+      overflow-x: hidden;
+      overflow-y: auto;
+   } */
+
+   &__footer {
+      display: flex;
+      justify-content: space-between;
+      padding: 0 0 0 0;
+   }
+
+   &__price {
+      /*       text-align: center;
+      font-weight: 500;
+      font-size: 1.5rem;
+      margin-top: -2.5rem;
+      margin-bottom: 1.3rem;
+      color: $color-bg-primary; */
+
+      text-align: center;
+      font-weight: 500;
+      font-size: 1.5rem;
+      margin-top: 1rem;
+      margin-bottom: -4.5rem;
+      color: $color-bg-primary;
+
+   }
+
+   //----------------------
+   &__btn-container-cart {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+   }
+
+   &__btnTextDet{
+      display: inline;
+      visibility: hidden;
+   }
+
+   &__btnTextCart{
+      display: inline;
+      visibility: hidden;
+   }
+   //----------------------
+   &__btn-cart {
+      position: relative;
+      right: -4.8rem;
+      cursor: pointer;
+
+      color: $color-font-ligth;
+      background-color: $color-bg-primary;
+      padding: 1rem;
+      border-radius: 10px 0px 0px 10px;
+      margin-bottom: .8rem;
+   }
+
+   &__btn-cart:hover, &__btnTextCart{
+      right: 0rem;
+      transition: all 0.3s ease-out;
+      background-color: $color-font-dark;
+
+      visibility:visible;
+   }
+
+
+   &__btn {
+      position: relative;
+      right: +4.5rem;
+
+      cursor: pointer;
+      color: $color-font-ligth;
+      background-color: $color-bg-primary;
+      padding: +1rem;
+      border-radius: 0px 10px 10px 0px;
+   }
+
+   &__btn:hover , &__btnTextDet {
+      right: 0rem;
+      transition: all 0.3s ease-out;
+      background-color: $color-font-dark;
+      visibility:visible;
+   }
+
+   &__date {
+      /* visibility: hidden; */
+      /* background-color: $color-bg-date;
+      color: $color-font-ligth;
+      text-align: center;
+      font-weight: bold;
+      font-size: .8rem;
+      padding: .2rem; */
+
+      color: $color-font-ligth2;
+      text-align: right;
+      font-weight: bold;
+      font-size: .8rem;
+      padding: .2rem;
+
+   }
+}
+
+.whish-list-on {
+   color: $color-wish-list-on;
+}
+
+.whish-list-off {
+   color: $color-wish-list-off;
+}
+
+.fa-cart-shopping,
+.fa-circle-info {
+   padding-left: 8px;
+   padding-right: 8px;
+}
+
+

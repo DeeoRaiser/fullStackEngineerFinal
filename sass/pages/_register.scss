@@ -1,0 +1,115 @@
+.section {
+    display: flex;
+    justify-content: center;
+}
+
+
+
+.form-container {
+    padding: 1.5rem;
+    background-color: $color-bg-primary;
+    font-family: Arial, Helvetica, sans-serif;
+    -webkit-box-shadow: $shadow0;
+    -moz-box-shadow: $shadow0;
+    box-shadow: $shadow0;
+    width: 50vw;
+    border-radius: 5px;
+
+    &__item {
+        display: block;
+        width: 100%;
+        color: $color-background;
+        margin-bottom: 1rem;
+    }
+    &__itemGender{
+        display: block;
+        width: 100%;
+        color: $color-background;
+    }
+    &__button{
+        text-align: center;
+    }
+    &__label{
+        margin-top: 5px;
+    }
+    &__input{
+        width: 100%;
+        padding: 8px;
+        border-radius: 3px;
+        border: none;
+        margin-top: 5px;
+        border: none;
+        outline: none;
+    }
+
+    &__textarea{
+        width: 100%;
+        height: 5rem;
+        outline: none;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        border-radius: 5px;
+    }
+}
+
+
+.born-country-container__country {
+    width: 100%;
+    padding: 5px;
+    margin-bottom: 1rem;
+}
+
+.gender-container {
+    padding: .3rem;
+    font-family: Arial, Helvetica, sans-serif;
+    color: $color-background;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    &__sec{
+        display: inline-flex;
+        
+    }
+    &__label {
+        padding: 0.3rem;
+    }
+}
+
+.therms-container {
+    padding: .3rem;
+    font-family: Arial, Helvetica, sans-serif;
+    color: $color-background;
+    margin-bottom: 1rem;
+
+    &__label {
+        margin-left: 0.5rem;
+    }
+}
+
+.err {
+    box-shadow: 0px 0px 3px 1px red;
+    //border: 2px solid red;
+}
+
+
+
+.register__button {
+    padding: .5rem .9rem .5rem .9rem;
+    background-color: $color-bg-secondary;
+    color: $color-background;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 50%;
+}
+
+@media only screen and (max-width: 600px) {
+    .form-container {
+        width: 90vw;
+    }
+}
+
+@media only screen and (max-width: 900px) {
+    .form-container {
+        width: 70vw;
+    }
+}

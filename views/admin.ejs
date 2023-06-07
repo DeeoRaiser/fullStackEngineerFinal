@@ -1,0 +1,529 @@
+<%- include('partials/head') %>
+
+
+    <body>
+        <%- include('partials/header') %>
+            <main class="main">
+                <div class="tabButtons">
+                    <button class="tablinks" onclick="openTab(event, 'tab1')"><i class="fa-solid fa-box"></i> ABM Artículos</button>
+                    <button class="tablinks" onclick="openTab(event, 'tab2')"><i class="fa-solid fa-user"></i> ABM Usuarios</button>
+                    <button class="tablinks" onclick="openTab(event, 'tab3')"><i class="fa-solid fa-cart-shopping"></i> ABM Ordenes</button>
+                </div>
+
+                <div id="tab1" class="tab-art tabcontent">
+
+                    <div class="searchOption">
+                        <div id="newArt" class="button__ok arts-options__new-art">
+                            <i class="fa-solid fa-box"></i> Nuevo Articulo
+                        </div>
+
+                        <div class="search">
+                            <input class="search__input" placeholder="Buscar Articulo" id="search-input-art">
+                            <div id="search-button-art" class="button__ok search__button">
+                                <i class="fa-solid fa-magnifying-glass"></i> Buscar
+                            </div>
+                        </div>
+
+
+                        <div class="orderBy">
+                            <select class="section-cards__orderby" name="order-by" id="order-by">
+                                <option value="Descripción A-Z">Descripción A-Z</option>
+                                <option value="Descripción Z-A">Descripción Z-A</option>
+                                <option value="Precio mayor primero">Precio mayor primero</option>
+                                <option value="Precio menor primero">Precio menor primero</option>
+                            </select>
+                            <i id="menor-mayor" class="fa-solid fa-arrow-down-short-wide"></i>
+                            <i id="mayor-menor" class="fa-solid fa-arrow-down-wide-short"></i>
+                            <i id="a-z" class="fa-solid fa-arrow-down-a-z"></i>
+                            <i id="z-a" class="fa-solid fa-arrow-down-z-a"></i>
+                        </div>
+                    </div>
+
+
+                    <div id="listArt" class="listArt">
+
+                    </div>
+
+                    <div id="modalArt" class="modal">
+                        <form id="article-form" class="form-container">
+                            <span id="close0" class="close">&times;</span>
+
+                            <div id="id" class="" style="display: none;">
+                                <label class="form-container__label" for="title">ID</label>
+                                <input id="idArt" class="form-container__input input-form" readonly type="text"
+                                    name="artID">
+                            </div>
+
+                            <div id="art-name-container" class="name-container form-container__item">
+                                <label class="form-container__label" for="title">Nombre del artículo</label>
+                                <input class="form-container__input input-form" type="text" name="title"
+                                    placeholder=" Nombre del producto" required>
+                            </div>
+
+                            <div id="art-pic-container" class="pic-container form-container__item">
+                                <label class="form-container__label" for="routeImage">Imagen</label>
+                                <div class="art__pic">
+                                    <img id="artPic" alt="Imagen de producto"
+                                        src="/assets/img/store/default-product-image.png">
+                                </div>
+                                <input id="routeImageArt" class="form-container__input input-form button__ok"
+                                    type="file" accept="image/*" name="image" required>
+
+                            </div>
+
+                            <div id="art-date-container" class="date-container form-container__item">
+                                <label class="form-container__label" for="date-date">Descripcion del Artículo</label>
+                                <textarea class="form-container__textarea textarea-form" name="description"
+                                    required></textarea>
+                            </div>
+
+                            <div id="art-price-container" class="price-container form-container__item">
+                                <label class="form-container__label" for="price">Precio</label>
+                                <input class="form-container__input input-form" type="text" name="price"
+                                    placeholder="1000,00" required>
+                            </div>
+
+                            <div id="art-date-container" class="date-container form-container__item">
+                                <label class="form-container__label" for="date-date">Fecha</label>
+                                <input class="form-container__input input-form" type="date" name="date" required>
+                            </div>
+
+                            <div class="submit">
+                                <input id="art-cancel" class="submit__button-cancel button__cancel" value="Cancelar"
+                                    type="button">
+                                <input id="art-submit" class="submit__button-save button__ok" value="Actualizar"
+                                    type="submit">
+                            </div>
+                        </form>
+                    </div>
+
+                </div>
+
+                <div id="tab2" class="tab-usr tabcontent">
+                    <div id="modalUser" class="modal">
+                        <div class="modal-content">
+
+                            <form id="register-form-adm" class="form-container">
+
+                                <div class="name-container form-container__item">
+                                    <label class="form-container__label" for="name">Nombre Completo</label>
+                                    <input class="form-container__input input-form" type="text" name="name" id="name"
+                                        placeholder="Nombre y Apellido" required>
+                                </div>
+
+                                <div class="mail-container form-container__item">
+                                    <label class="form-container__label" for="email">Email</label>
+                                    <input class="form-container__input input-form" id="email" type="email" name="mail"
+                                        minlength="8" maxlength="45" onfocus="quitMailErr()"
+                                        pattern="/[a-zA-Z0-9!#$%&'*_+-]([\.]?[a-zA-Z0-9!#$%&'*_+-])+@[a-zA-Z0-9]([^@&%$\/()=?¿!.,:;]|\d)+[a-zA-Z0-9][\.][a-zA-Z]{2,4}([\.][a-zA-Z]{2})?/u"
+                                        id="email" placeholder="example@email.com" required>
+                                </div>
+
+                                <div class="password-container form-container__item">
+                                    <label class="form-container__label" for="password1">Contraseña</label>
+                                    <input class="form-container__input input-form" type="password" name="password1"
+                                        id="password1" onfocus="quitPassErr()" required>
+                                </div>
+
+                                <div class="reply-password-container form-container__item">
+                                    <label class="form-container__label" for="password2">Repetir Contraseña</label>
+                                    <input class="form-container__input input-form" type="password" name="password2"
+                                        id="password2" onfocus="quitPassErr()" required>
+                                </div>
+
+                                <div class="age-container form-container__item">
+                                    <label class="form-container__label" for="age">Edad</label>
+                                    <input class="form-container__input input-form" type="number" name="age" id="age"
+                                        min="12" max="110" step="1" required>
+                                </div>
+
+                                <div class="born-container form-container__item">
+                                    <label class="form-container__label" for="born-date">Fecha de Nacimiento</label>
+                                    <input class="form-container__input input-form" type="date" name="borndate"
+                                        id="born-date" required>
+                                </div>
+
+                                <div class="born-country-container form-container__item">
+                                    <label class="form-container__label" for="born-country">Pais de Nacimiento</label>
+                                    <select id="country" name="country" class="form-container__input" required>
+                                        <option value="AF">Afghanistan</option>
+                                        <option value="AX">Åland Islands</option>
+                                        <option value="AL">Albania</option>
+                                        <option value="DZ">Algeria</option>
+                                        <option value="AS">American Samoa</option>
+                                        <option value="AD">Andorra</option>
+                                        <option value="AO">Angola</option>
+                                        <option value="AI">Anguilla</option>
+                                        <option value="AQ">Antarctica</option>
+                                        <option value="AG">Antigua and Barbuda</option>
+                                        <option value="AR">Argentina</option>
+                                        <option value="AM">Armenia</option>
+                                        <option value="AW">Aruba</option>
+                                        <option value="AU">Australia</option>
+                                        <option value="AT">Austria</option>
+                                        <option value="AZ">Azerbaijan</option>
+                                        <option value="BS">Bahamas</option>
+                                        <option value="BH">Bahrain</option>
+                                        <option value="BD">Bangladesh</option>
+                                        <option value="BB">Barbados</option>
+                                        <option value="BY">Belarus</option>
+                                        <option value="BE">Belgium</option>
+                                        <option value="BZ">Belize</option>
+                                        <option value="BJ">Benin</option>
+                                        <option value="BM">Bermuda</option>
+                                        <option value="BT">Bhutan</option>
+                                        <option value="BO">Bolivia, Plurinational State of</option>
+                                        <option value="BQ">Bonaire, Sint Eustatius and Saba</option>
+                                        <option value="BA">Bosnia and Herzegovina</option>
+                                        <option value="BW">Botswana</option>
+                                        <option value="BV">Bouvet Island</option>
+                                        <option value="BR">Brazil</option>
+                                        <option value="IO">British Indian Ocean Territory</option>
+                                        <option value="BN">Brunei Darussalam</option>
+                                        <option value="BG">Bulgaria</option>
+                                        <option value="BF">Burkina Faso</option>
+                                        <option value="BI">Burundi</option>
+                                        <option value="KH">Cambodia</option>
+                                        <option value="CM">Cameroon</option>
+                                        <option value="CA">Canada</option>
+                                        <option value="CV">Cape Verde</option>
+                                        <option value="KY">Cayman Islands</option>
+                                        <option value="CF">Central African Republic</option>
+                                        <option value="TD">Chad</option>
+                                        <option value="CL">Chile</option>
+                                        <option value="CN">China</option>
+                                        <option value="CX">Christmas Island</option>
+                                        <option value="CC">Cocos (Keeling) Islands</option>
+                                        <option value="CO">Colombia</option>
+                                        <option value="KM">Comoros</option>
+                                        <option value="CG">Congo</option>
+                                        <option value="CD">Congo, the Democratic Republic of the</option>
+                                        <option value="CK">Cook Islands</option>
+                                        <option value="CR">Costa Rica</option>
+                                        <option value="CI">Côte d'Ivoire</option>
+                                        <option value="HR">Croatia</option>
+                                        <option value="CU">Cuba</option>
+                                        <option value="CW">Curaçao</option>
+                                        <option value="CY">Cyprus</option>
+                                        <option value="CZ">Czech Republic</option>
+                                        <option value="DK">Denmark</option>
+                                        <option value="DJ">Djibouti</option>
+                                        <option value="DM">Dominica</option>
+                                        <option value="DO">Dominican Republic</option>
+                                        <option value="EC">Ecuador</option>
+                                        <option value="EG">Egypt</option>
+                                        <option value="SV">El Salvador</option>
+                                        <option value="GQ">Equatorial Guinea</option>
+                                        <option value="ER">Eritrea</option>
+                                        <option value="EE">Estonia</option>
+                                        <option value="ET">Ethiopia</option>
+                                        <option value="FK">Falkland Islands (Malvinas)</option>
+                                        <option value="FO">Faroe Islands</option>
+                                        <option value="FJ">Fiji</option>
+                                        <option value="FI">Finland</option>
+                                        <option value="FR">France</option>
+                                        <option value="GF">French Guiana</option>
+                                        <option value="PF">French Polynesia</option>
+                                        <option value="TF">French Southern Territories</option>
+                                        <option value="GA">Gabon</option>
+                                        <option value="GM">Gambia</option>
+                                        <option value="GE">Georgia</option>
+                                        <option value="DE">Germany</option>
+                                        <option value="GH">Ghana</option>
+                                        <option value="GI">Gibraltar</option>
+                                        <option value="GR">Greece</option>
+                                        <option value="GL">Greenland</option>
+                                        <option value="GD">Grenada</option>
+                                        <option value="GP">Guadeloupe</option>
+                                        <option value="GU">Guam</option>
+                                        <option value="GT">Guatemala</option>
+                                        <option value="GG">Guernsey</option>
+                                        <option value="GN">Guinea</option>
+                                        <option value="GW">Guinea-Bissau</option>
+                                        <option value="GY">Guyana</option>
+                                        <option value="HT">Haiti</option>
+                                        <option value="HM">Heard Island and McDonald Islands</option>
+                                        <option value="VA">Holy See (Vatican City State)</option>
+                                        <option value="HN">Honduras</option>
+                                        <option value="HK">Hong Kong</option>
+                                        <option value="HU">Hungary</option>
+                                        <option value="IS">Iceland</option>
+                                        <option value="IN">India</option>
+                                        <option value="ID">Indonesia</option>
+                                        <option value="IR">Iran, Islamic Republic of</option>
+                                        <option value="IQ">Iraq</option>
+                                        <option value="IE">Ireland</option>
+                                        <option value="IM">Isle of Man</option>
+                                        <option value="IL">Israel</option>
+                                        <option value="IT">Italy</option>
+                                        <option value="JM">Jamaica</option>
+                                        <option value="JP">Japan</option>
+                                        <option value="JE">Jersey</option>
+                                        <option value="JO">Jordan</option>
+                                        <option value="KZ">Kazakhstan</option>
+                                        <option value="KE">Kenya</option>
+                                        <option value="KI">Kiribati</option>
+                                        <option value="KP">Korea, Democratic People's Republic of</option>
+                                        <option value="KR">Korea, Republic of</option>
+                                        <option value="KW">Kuwait</option>
+                                        <option value="KG">Kyrgyzstan</option>
+                                        <option value="LA">Lao People's Democratic Republic</option>
+                                        <option value="LV">Latvia</option>
+                                        <option value="LB">Lebanon</option>
+                                        <option value="LS">Lesotho</option>
+                                        <option value="LR">Liberia</option>
+                                        <option value="LY">Libya</option>
+                                        <option value="LI">Liechtenstein</option>
+                                        <option value="LT">Lithuania</option>
+                                        <option value="LU">Luxembourg</option>
+                                        <option value="MO">Macao</option>
+                                        <option value="MK">Macedonia, the former Yugoslav Republic of</option>
+                                        <option value="MG">Madagascar</option>
+                                        <option value="MW">Malawi</option>
+                                        <option value="MY">Malaysia</option>
+                                        <option value="MV">Maldives</option>
+                                        <option value="ML">Mali</option>
+                                        <option value="MT">Malta</option>
+                                        <option value="MH">Marshall Islands</option>
+                                        <option value="MQ">Martinique</option>
+                                        <option value="MR">Mauritania</option>
+                                        <option value="MU">Mauritius</option>
+                                        <option value="YT">Mayotte</option>
+                                        <option value="MX">Mexico</option>
+                                        <option value="FM">Micronesia, Federated States of</option>
+                                        <option value="MD">Moldova, Republic of</option>
+                                        <option value="MC">Monaco</option>
+                                        <option value="MN">Mongolia</option>
+                                        <option value="ME">Montenegro</option>
+                                        <option value="MS">Montserrat</option>
+                                        <option value="MA">Morocco</option>
+                                        <option value="MZ">Mozambique</option>
+                                        <option value="MM">Myanmar</option>
+                                        <option value="NA">Namibia</option>
+                                        <option value="NR">Nauru</option>
+                                        <option value="NP">Nepal</option>
+                                        <option value="NL">Netherlands</option>
+                                        <option value="NC">New Caledonia</option>
+                                        <option value="NZ">New Zealand</option>
+                                        <option value="NI">Nicaragua</option>
+                                        <option value="NE">Niger</option>
+                                        <option value="NG">Nigeria</option>
+                                        <option value="NU">Niue</option>
+                                        <option value="NF">Norfolk Island</option>
+                                        <option value="MP">Northern Mariana Islands</option>
+                                        <option value="NO">Norway</option>
+                                        <option value="OM">Oman</option>
+                                        <option value="PK">Pakistan</option>
+                                        <option value="PW">Palau</option>
+                                        <option value="PS">Palestinian Territory, Occupied</option>
+                                        <option value="PA">Panama</option>
+                                        <option value="PG">Papua New Guinea</option>
+                                        <option value="PY">Paraguay</option>
+                                        <option value="PE">Peru</option>
+                                        <option value="PH">Philippines</option>
+                                        <option value="PN">Pitcairn</option>
+                                        <option value="PL">Poland</option>
+                                        <option value="PT">Portugal</option>
+                                        <option value="PR">Puerto Rico</option>
+                                        <option value="QA">Qatar</option>
+                                        <option value="RE">Réunion</option>
+                                        <option value="RO">Romania</option>
+                                        <option value="RU">Russian Federation</option>
+                                        <option value="RW">Rwanda</option>
+                                        <option value="BL">Saint Barthélemy</option>
+                                        <option value="SH">Saint Helena, Ascension and Tristan da Cunha</option>
+                                        <option value="KN">Saint Kitts and Nevis</option>
+                                        <option value="LC">Saint Lucia</option>
+                                        <option value="MF">Saint Martin (French part)</option>
+                                        <option value="PM">Saint Pierre and Miquelon</option>
+                                        <option value="VC">Saint Vincent and the Grenadines</option>
+                                        <option value="WS">Samoa</option>
+                                        <option value="SM">San Marino</option>
+                                        <option value="ST">Sao Tome and Principe</option>
+                                        <option value="SA">Saudi Arabia</option>
+                                        <option value="SN">Senegal</option>
+                                        <option value="RS">Serbia</option>
+                                        <option value="SC">Seychelles</option>
+                                        <option value="SL">Sierra Leone</option>
+                                        <option value="SG">Singapore</option>
+                                        <option value="SX">Sint Maarten (Dutch part)</option>
+                                        <option value="SK">Slovakia</option>
+                                        <option value="SI">Slovenia</option>
+                                        <option value="SB">Solomon Islands</option>
+                                        <option value="SO">Somalia</option>
+                                        <option value="ZA">South Africa</option>
+                                        <option value="GS">South Georgia and the South Sandwich Islands</option>
+                                        <option value="SS">South Sudan</option>
+                                        <option value="ES">Spain</option>
+                                        <option value="LK">Sri Lanka</option>
+                                        <option value="SD">Sudan</option>
+                                        <option value="SR">Suriname</option>
+                                        <option value="SJ">Svalbard and Jan Mayen</option>
+                                        <option value="SZ">Swaziland</option>
+                                        <option value="SE">Sweden</option>
+                                        <option value="CH">Switzerland</option>
+                                        <option value="SY">Syrian Arab Republic</option>
+                                        <option value="TW">Taiwan, Province of China</option>
+                                        <option value="TJ">Tajikistan</option>
+                                        <option value="TZ">Tanzania, United Republic of</option>
+                                        <option value="TH">Thailand</option>
+                                        <option value="TL">Timor-Leste</option>
+                                        <option value="TG">Togo</option>
+                                        <option value="TK">Tokelau</option>
+                                        <option value="TO">Tonga</option>
+                                        <option value="TT">Trinidad and Tobago</option>
+                                        <option value="TN">Tunisia</option>
+                                        <option value="TR">Turkey</option>
+                                        <option value="TM">Turkmenistan</option>
+                                        <option value="TC">Turks and Caicos Islands</option>
+                                        <option value="TV">Tuvalu</option>
+                                        <option value="UG">Uganda</option>
+                                        <option value="UA">Ukraine</option>
+                                        <option value="AE">United Arab Emirates</option>
+                                        <option value="GB">United Kingdom</option>
+                                        <option value="US">United States</option>
+                                        <option value="UM">United States Minor Outlying Islands</option>
+                                        <option value="UY">Uruguay</option>
+                                        <option value="UZ">Uzbekistan</option>
+                                        <option value="VU">Vanuatu</option>
+                                        <option value="VE">Venezuela, Bolivarian Republic of</option>
+                                        <option value="VN">Viet Nam</option>
+                                        <option value="VG">Virgin Islands, British</option>
+                                        <option value="VI">Virgin Islands, U.S.</option>
+                                        <option value="WF">Wallis and Futuna</option>
+                                        <option value="EH">Western Sahara</option>
+                                        <option value="YE">Yemen</option>
+                                        <option value="ZM">Zambia</option>
+                                        <option value="ZW">Zimbabwe</option>
+                                    </select>
+                                </div>
+
+                                <label class="form-container__itemGender" for="">Sexo</label>
+                                <div class="gender-container form-container__item">
+
+                                    <div class="gender-container__sec">
+                                        <input type="radio" class="gender-container__item " name="gender" value="0"
+                                            id="female" required>
+                                        <label class="gender-container__label" for="female">Femenino</label>
+                                    </div>
+                                    <div class="gender-container__sec">
+                                        <input type="radio" class="gender-container__item" name="gender" value="1"
+                                            id="male">
+                                        <label class="gender-container__label" for="male">Masculino</label>
+                                    </div>
+                                    <div class="gender-container__sec">
+                                        <input type="radio" class="gender-container__item" name="gender" value="2"
+                                            id="other">
+                                        <label class="gender-container__label" for="other">Otro</label>
+                                    </div>
+                                </div>
+
+                                <div class="therms-container form-container__item">
+                                    <input class="therms-container__input" type="checkbox" name="therms" id="therms"
+                                        required>
+                                    <label class="therms-container__label" for="therms">Acepto los términos y
+                                        condiciones</label>
+                                </div>
+                                <div class="submit-container form-container__button">
+                                    <input id="register-submit" class="button__cancel" value="Cancelar" type="button">
+                                    <input id="submit" class="register__button" value="Registrar !" type="submit">
+                                </div>
+                            </form>
+
+                        </div>
+                    </div>
+
+                    <div class="options">
+                        <div class="searchOption">
+                            <div id="new-usr" class="button__ok user-options__new-usr">
+                                <i class="fa-solid fa-user"></i> Nuevo Usuario
+                            </div>
+
+                            <div class="search">
+                                <input class="search__input" placeholder="Buscar Usuario" id="search-input-user">
+                                <div id="search-button-user" class="button__ok search__button">
+                                    <i class="fa-solid fa-magnifying-glass"></i> Buscar
+                                </div>
+                            </div>
+
+
+                            <div class="orderBy">
+                                <!-- <select class="section-cards__orderby" name="order-by-usr" id="order-by-usr">
+                                    <option value="Nombre A-Z">Nombre A-Z</option>
+                                    <option value="Nombre Z-A">Nombre Z-A</option>
+                                    <option value="Mail A-Z">Mail A-Z</option>
+                                    <option value="Mail Z-A">Mail Z-A</option>
+                                </select>
+                                <i id="menor-mayor-usr" class="fa-solid fa-arrow-down-short-wide"></i>
+                                <i id="mayor-menor-usr" class="fa-solid fa-arrow-down-wide-short"></i>
+                                <i id="a-z-usr" class="fa-solid fa-arrow-down-a-z"></i>
+                                <i id="z-a-usr" class="fa-solid fa-arrow-down-z-a"></i> -->
+                            </div>
+                        </div>
+
+                        <div id="listUsr" class="listUsr">
+
+                        </div>
+                    </div>
+                </div>
+
+                <div id="tab3" class="tabcontent">
+
+                        <div class="searchOption">
+    
+                            <div class="search">
+                                <div id="search-all-orders" class="button__ok" onclick="getAllOrders()">
+                                    <i class="fa-solid fa-magnifying-glass"></i>Todas las ordenes
+                                </div>
+                                <input class="search__input" placeholder="Buscar Orden" id="search-input">
+                                <div id="search-button-order" class="button__ok search__button">
+                                    <i class="fa-solid fa-magnifying-glass"></i> Buscar
+                                </div>
+                            </div>
+                        </div>
+
+                        
+                    <div id="modalOrder" class="modal">
+                        <form id="order-form" class="form-container">
+                            <span id="close1" class="close">&times;</span>
+
+                            <div class="form-container__item">
+                                <label class="form-container__label" for="title">Order ID</label>
+                                <input id="id-order" class="form-container__input" type="text" name="idOrder"
+                                    required readonly>
+                            </div>
+
+                            <div class="form-container__item">
+                                <label class="form-container__label" for="order-state">Nuevo Estado</label>
+                                <select id="order-state" name="orderStatus" class="form-container__input" required>
+                                    <option value="Pagada">Pagada</option>
+                                    <option value="Procesada">Procesada</option>
+                                    <option value="En Proceso de envio">En Proceso de envio</option>
+                                    <option value="Entregada">Entregada</option>
+                                    <option value="ELIMINAR">ELIMINAR</option>
+                                </select>
+                            </div>
+                            <div class="submit">
+                                <input id="order-cancel" class="submit__button-cancel button__cancel" value="Cancelar"
+                                    type="button">
+                                <input id="order-submit" class="submit__button-save button__ok" value="Actualizar Orden"
+                                    type="submit">
+                            </div>
+                        </form>
+                    </div>
+
+
+                    <div id="row-order-detail" class="row-order-detail">
+
+                    </div>
+                </div>
+
+
+            </main>
+            <%- include('partials/footer') %>
+
+                <script src="/js/general.js"></script>
+                <script src="/js/render.js"></script>
+                <script src="/js/alert.js"></script>
+                <script src="/js/admin.js"></script>
+    </body>

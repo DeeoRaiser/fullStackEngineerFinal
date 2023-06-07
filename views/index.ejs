@@ -1,0 +1,117 @@
+<%- include('partials/head') %>
+<body>
+
+    <%- include('partials/header') %>
+    
+    <!-- TODO: Implementar carousel en 2do módulo -->
+    <main class="main">
+        <section class="section-cards">
+
+            <header class="section-cards__header">
+                <div class="section-cards__title-container">
+                    <h1 class="section-cards__title">
+                        Ransom & Wilder
+                    </h1>
+                    <p class="section-cards__subtitle">
+                        The Best American Vintage Shop
+                    </p>
+                </div>
+                <div class="section-cards__products-search-container">
+
+                    <div class="product-search">
+                        <div class="product-search__icon"><i class="fa-solid fa-magnifying-glass"></i></div>
+                        <input id="search-input" placeholder="Que deseas comprar hoy ?" type="text"
+                            class="product-search__input">
+                        <button id="search-button" class="product-search__btn">Buscar</button>
+                    </div>
+
+                    <div id="count-result" class="section-cards__products-count">
+                        <!-- Se encontraron 12 resultados -->
+                    </div>
+                </div>
+            </header>
+
+            <div class="section-cards__search-title">
+                <h1 id="search-title">
+                    Todos los articulos
+                </h1>
+                <div class="orderBy">
+                    <select class="section-cards__orderby" name="order-by" id="order-by">
+                        <option value="Descripción A-Z">Descripción A-Z</option>
+                        <option value="Descripción Z-A">Descripción Z-A</option>
+                        <option value="Precio mayor primero">Precio mayor primero</option>
+                        <option value="Precio menor primero">Precio menor primero</option>
+                    </select>
+                    <i id="menor-mayor" class="fa-solid fa-arrow-down-short-wide"></i>
+                    <i id="mayor-menor" class="fa-solid fa-arrow-down-wide-short"></i>
+                    <i id="a-z" class="fa-solid fa-arrow-down-a-z"></i>
+                    <i id="z-a" class="fa-solid fa-arrow-down-z-a"></i>
+                </div>
+
+            </div>
+            <div id="cards-container" class="cards-container">
+
+                <!-- AQUI SE CARGAN LAS CARDS! -->
+
+            </div>
+
+        </section>
+
+        <!-- MODAL DESCRIPCION DE ARTICULO  -->
+        <div id="modal" class="modal-index">
+            <div class="modal-index__container">
+                <span id="close" class="modal-index__container__close">&times;</span>
+                <div class="article">
+                    <div id="art-Title" class="article__name-product">
+                        {name}
+                    </div>
+                    <div class="article__body">
+                        <div class="article__column1">
+                            <img id="article-photo" class="article__image" src="" alt="Imagen de Producto">
+                        </div>
+                        <div class="article__column2">
+                            <p id="article-description" class="article__description">
+                                {description}
+                            </p>
+                            <div id="article-price" class="article__price">
+                                {price}
+                            </div>
+                            <div class="cart-containter">
+                                <label class="cart-containter__label">CANTIDAD</label>
+
+                                <div class="quantity-container">
+                                    <div class="cart-containter__del" id="del"><i class="fa-solid fa-minus"></i></div>
+                                    <input id="quantity" class="cart-containter__qnty" value="1" min="1" max="100"
+                                        type="number" name="quantity" readonly>
+                                    <div class="cart-containter__add" id="add"><i class="fa-solid fa-plus"></i></div>
+                                </div>
+
+                                <div id="modalAddCart" class="cart-containter__addCart button__ok">
+                                    <i class="fa-solid fa-cart-shopping"></i>
+                                    Agregar!
+                                </div>
+                                <div id="modalWishAdd" class="cart-containter__addWish button__wl">
+                                    <i class="fa-solid fa-heart"></i>
+                                    Me Gusta!
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <%- include('partials/footer') %>
+
+    <script src="/js/render.js"></script>
+    <script src="/js/general.js"></script>
+    <script src="/js/index.js"></script>
+    <script src="/js/alert.js"></script>
+</body>
+</html>
+
+
+
+
+

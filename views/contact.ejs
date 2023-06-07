@@ -1,0 +1,51 @@
+
+<%- include('partials/head') %>
+<%- include('partials/header') %>
+
+<body>
+    <main class="main-contact">
+
+        <div class="main-contact__map">
+            <h1 class="titulo-h1">Visitanos!</h1>
+            <iframe
+                src="https://www.google.com/maps/embed?pb=!1m16!1m12!1m3!1d8040.450896753331!2d-64.54006906331583!3d-32.08025068519654!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!2m1!1salquimia!5e0!3m2!1ses-419!2sar!4v1672866931106!5m2!1ses-419!2sar"
+                width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade">
+            </iframe>
+        </div>
+    
+        <div class="main-contact__form">
+            <h1 class="titulo-h1">Contactanos!</h1>
+            <form class="contact-form">
+                <div class="field-container contact-form__item">
+                    <label class="field-container__label" for="name">Nombre</label><br>
+                    <input class="field-container__input" type="text" name="name" id="name"
+                        placeholder="Nombre y Apellido">
+                </div>
+    
+                <div class="field-container contact-form__item">
+                    <label class="field-container__label" for="name">Mail</label><br>
+                    <input class="field-container__input" type="mail" name="mail" id="mail"
+                        placeholder="correo@dominio.com"
+                        pattern="[a-zA-Z0-9!#$%&'*_+-]([\.]?[a-zA-Z0-9!#$%&'*_+-])+@[a-zA-Z0-9]([^@&%$\/()=?¿!.,:;]|\d)+[a-zA-Z0-9][\.][a-zA-Z]{2,4}([\.][a-zA-Z]{2})?">
+                </div>
+    
+                <div class="field-container contact-form__item">
+                    <label class="field-container__label">Mensaje</label><br>
+                    <textarea class="field-container__input field-container__area" name="message"
+                        id="message"></textarea>
+                </div>
+    
+                <button type="submit" class="contact-form__btn">Enviar</button>
+    
+            </form>
+        </div>
+    
+    </main>
+    <%- include('partials/footer') %>
+    <script src="/js/general.js"></script>
+    <script src="/js/render.js"></script>
+</body>
+</htlm>
+
+

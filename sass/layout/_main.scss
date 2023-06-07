@@ -1,0 +1,19 @@
+.main{
+    //margin-top: 150px;//ALTURA DEL HEADER, HEADER COMO position: fixed
+    padding: 1.5rem;
+    color: $color-font-dark;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+
+body{
+
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between
+
+}
+

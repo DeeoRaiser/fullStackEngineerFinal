@@ -1,0 +1,45 @@
+.button{
+    &__cancel {
+        padding: .5rem .9rem .5rem .9rem;
+        background-color: $color-cancel-btn;
+        color: $color-background;
+        box-shadow: $shadow0;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        width: auto;
+        text-align: center;
+    }
+
+    &__ok {
+        padding: .5rem .9rem .5rem .9rem;
+        margin-right: .8rem;
+        background-color: $color-ok-btn;
+        color: $color-background;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        width: auto;
+        box-shadow: $shadow0;
+    }
+    &__ok:hover{
+        background-color: $color-ok-btn-hv;
+    }
+
+    &__wl {
+        padding: .5rem .9rem .5rem .9rem;
+        background-color: $color-wl-btn;
+        color: $color-background;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        width: auto;
+        box-shadow: $shadow0;
+    }
+    &__wl:hover{
+        background-color: $color-wl-btn-hv;
+    }
+
+    
+}
+

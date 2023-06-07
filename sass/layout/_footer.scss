@@ -1,0 +1,66 @@
+.footer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: $color-bg-secondary;
+
+    &__column {
+        padding: 1rem 1.5rem;
+    }
+    &__center {
+        text-align: center;
+    }
+
+    &__contact-item {
+        list-style: none;
+
+    }
+
+
+    &__logo {
+        height: 5rem;
+        filter: invert(100%);
+    }
+    &__contact-link {
+        color: white;
+        padding: .25rem;
+        display: flex;
+        align-items: center;
+        gap: .5rem;
+        display: inline-block;
+        font-size: .8rem;
+    }
+
+    &__company-name{
+        color: $color-wish-list-off;
+        font-size: 1rem;
+    }
+    &__copyrigth{
+        color: $color-wish-list-off;
+        font-size: .8rem;
+    }
+
+    .footer__contact-icon {
+        font-size: 1.2rem;
+        padding-right: .5rem;
+
+        &--facebook {
+            color: #38529a;
+        }
+
+        &--instagram {
+            color: #f14d59;
+        }
+
+        &--linkedin {
+            color: #0077b6;
+        }
+    }
+}
+
+@media screen and (min-width:600px) {
+    .footer {
+        justify-content: space-evenly;
+        flex-direction: row;
+    }
+}
