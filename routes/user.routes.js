@@ -14,6 +14,10 @@ router.post('/register', userController.postUser)
 //GET - Leer usuario
 //router.get('/users/:id', userController.getUser)
 
+
+//Busqueda de usuarios por nombre
+router.get('/api/user/:name', jwtVerify, isAdmin, userController.getUserName)
+
 //GET - Profile
 router.get('/api/profile', jwtVerify, userController.getProfileUser)
 

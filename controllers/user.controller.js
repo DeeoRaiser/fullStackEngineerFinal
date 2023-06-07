@@ -2,7 +2,7 @@ const User = require('../schemas/user.schema')
 
 const { responseCreator } = require('../utils/utils')
 const bcrypt = require('bcrypt')
-const saltRounds = 10; 
+const saltRounds = 10;
 const jwt = require('jsonwebtoken')
 const secret = require('../config/secret')
 
@@ -17,7 +17,7 @@ async function postUser(req, res) {
             console.log(mail)
             return res.status(401).send({ msg: 'El mail ingresado ya existe' })
         }
-        
+
         // Crear el nuevo usuario
         const user = new User({ name, mail, pass, gender, country, bornDate, therms })
         user.role = "CLIENT_ROLE"
@@ -49,6 +49,24 @@ async function getUser(req, res) {
     } catch (error) {
         console.log(error)
         return responseCreator(res, 500, 'No se pudo obtener el usuario')
+    }
+}
+
+async function getUserName(req, res) {
+    const searchTerm = req.params.name; // El término de búsqueda ingresado
+
+    try {
+        // Utilizamos una expresión regular para buscar por término parcial o completo
+        const users = await User.find({ name: { $regex: searchTerm, $options: 'i' } }, { password: 0, __v: 0 })
+
+        if (users.length === 0) {
+            return responseCreator(res, 404, 'No se encontraron usuarios')
+        }
+        console.log(users)
+        return responseCreator(res, 200, 'Usuarios encontrados', { users })
+    } catch (error) {
+        console.log(error)
+        return responseCreator(res, 500, 'No se pudo obtener los usuarios')
     }
 }
 
@@ -106,7 +124,7 @@ const login = async (req, res) => {
         }
 
         const body = {
-            user:user._id,
+            user: user._id,
         }
         const token = jwt.sign(body, secret)
 
@@ -116,7 +134,7 @@ const login = async (req, res) => {
             user,
             token
         })
-        
+
 
     } catch (error) {
         console.log(error);
@@ -125,27 +143,27 @@ const login = async (req, res) => {
 }
 
 async function updateUser(req, res) {
-    let data ={}
+    let data = {}
 
-    if (req.body.img){
-        data ={name:req.body.img}
-    }else{
-        data ={
-            name:req.body.name,
-            mail:req.body.mail,
+    if (req.body.img) {
+        data = { name: req.body.img }
+    } else {
+        data = {
+            name: req.body.name,
+            mail: req.body.mail,
             bornDate: req.body.bornDate,
             country: req.body.country,
-            gender:req.body.gender
+            gender: req.body.gender
         }
     }
-    
-    try {  
+
+    try {
         const updatedUser = await User.findByIdAndUpdate(req.user, data, { new: true })
         //TRUE:Si mi usuario se actualizo correctamente, me lo devuelve
 
         if (!updatedUser) responseCreator(res, 404, 'No se encontro el usuario')
 
-        return responseCreator(res, 200, 'Usuario actualizado correctamente', {user:updatedUser})
+        return responseCreator(res, 200, 'Usuario actualizado correctamente', { user: updatedUser })
 
     } catch (error) {
         console.log(error)
@@ -158,9 +176,9 @@ async function updateUserImage(req, res) {
     console.log(req.body)
 
     let data = {
-        img:req.body.image
+        img: req.body.image
     }
-    try {  
+    try {
         const updatedUser = await User.findByIdAndUpdate(req.user, data, { new: true })
         console.log(updatedUser)
         if (!updatedUser) responseCreator(res, 404, 'No se encontro el usuario')
@@ -197,7 +215,7 @@ async function updatePassword(req, res) {
     }
 }
 
-async function getProfileUser(req, res){
+async function getProfileUser(req, res) {
     const user = await User.findOne({ _id: req.user })
 
     return res.status(200).send({
@@ -206,7 +224,7 @@ async function getProfileUser(req, res){
     })
 }
 
-async function adminPanel(req, res){
+async function adminPanel(req, res) {
     ("\x1b[31m AdminPanel \x1b[0m ")
     return res.status(200).send({ msg: 'AdminUser' })
 }
@@ -222,6 +240,7 @@ module.exports = {
     updatePassword,
     updateUserImage,
     getProfileUser,
-    adminPanel
-    
+    adminPanel,
+    getUserName
+
 }

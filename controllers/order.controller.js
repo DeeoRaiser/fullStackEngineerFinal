@@ -117,9 +117,10 @@ async function getOrders(req, res) {
         const users = await User.find({ _id: { $in: userIds } }).lean();
 
         const orders = orders1.map(order => {
-            const user = users.find(user => user._id.toString() === order.userId.toString());
-            console.log(userF.name)
-            console.log(userF.mail)
+            let user = users.find(user => user._id.toString() === order.userId.toString());
+            console.log(user.name)
+            console.log(user.mail)
+
             return {
                 ...order,
                 _id: order._id.toHexString(),

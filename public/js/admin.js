@@ -17,7 +17,7 @@ var usrSearchFilter = [] //Array donde se gurdan los usuarios del termino de bus
 //Obtiene todos los articulos de la base de datos
 async function obtenerTodosLosArticulos() {
   try {
-    const response = await axios.get('/api/page/1')
+    const response = await axios.get(`/api/page/1`)
     const datos = response.data
     arts = datos.registros
     addArticles(orderBy(arts, "Descripción A-Z"))
@@ -28,7 +28,7 @@ async function obtenerTodosLosArticulos() {
 
 //Verifico si el usuario logueado es admin....
 async function adminPanel() {
-  let access = await callApiPrivate('/user/admin', "post")
+  let access = await callApiPrivate(`/user/admin`, "post")
   if (await access.msg === "AdminUser") {
     obtenerTodosLosArticulos()
     obtenerTodosLosUsers()
@@ -55,10 +55,126 @@ async function obtenerTodosLosUsers() {
 //Obtengo todos las ordenes de los usuarios
 async function getAllOrders() {
   let allOrders = await callApiPrivate('/api/get-orders', 'get')
+  if (allOrders) {
+
+    renderOrders(allOrders.orders)
+  } else {
+    console.log("error all order")
+  }
   console.log(allOrders.orders)
-  renderOrders(allOrders.orders)
 }
 
+function renderOrders(orders) {
+  let user = JSON.parse(localStorage.getItem('user'))
+
+  const orderSection = document.getElementById('row-order-detail')
+  orderSection.innerHTML = ""
+  if (!orders) {
+    orderSection.innerHTML = "<h1>No hay ordenes cargadas</h1>"
+  }
+
+
+  orders.forEach(order => {
+    const orderContainer = document.createElement('div')
+    orderContainer.className = 'order-container'
+
+    // Header, idOrder y estado
+    const orderHeader = document.createElement('div')
+    orderHeader.className = 'order-container__order-header'
+
+    const orderStatus = document.createElement('p')
+    orderStatus.className = 'order-container__state'
+    orderStatus.innerHTML = `Estado: ${order.status}`
+
+    const orderID = document.createElement('div')
+    orderID.className = 'order-container__order-id'
+    orderID.innerHTML = `Orden: ${order._id}`
+
+    orderHeader.appendChild(orderID)
+    orderHeader.appendChild(orderStatus)
+
+
+    // OrderStatusAmoun Cambiar Estado y precio de la orden
+    const orderStatusAmount = document.createElement('div')
+    orderStatusAmount.className = 'order-container__statusAmount'
+
+    const orderUser = document.createElement('div')
+    orderUser.className = 'order-container__order-user'
+    orderUser.innerHTML = `User: ${order.userEmail}`
+
+    const orderAmount = document.createElement('p')
+    orderAmount.className = 'order-container__amount'
+    orderAmount.innerHTML = `Total: ${formatCurrency(order.amount)}`
+
+    orderStatusAmount.appendChild(orderUser)
+    orderStatusAmount.appendChild(orderAmount)
+
+
+
+    orderContainer.appendChild(orderHeader)
+    orderContainer.appendChild(orderStatusAmount)
+    if (user.role === "ADMIN_ROLE") {
+      const editButton = document.createElement('div')
+      editButton.className = 'button__ok'
+      editButton.innerHTML = "Cambiar Estado"
+      editButton.setAttribute('onclick', `editOrder('${order._id}')`)
+      orderContainer.appendChild(editButton)
+    }
+
+    const viewDetail = document.createElement('div')
+    viewDetail.className = 'button__ok'
+    viewDetail.innerHTML = "Ver Detalle"
+    viewDetail.setAttribute('onclick', `viewDetail('${order._id}')`)
+    viewDetail.setAttribute("id", `viewDetail${order._id}`)
+    orderContainer.appendChild(viewDetail)
+
+
+    const artsContainer = document.createElement('div')
+    artsContainer.setAttribute("id", `artsOrder${order._id}`)
+    artsContainer.className = 'arts-container'
+    artsContainer.style.display = "none"
+
+    order.arts.forEach(art => {
+      const divRow = document.createElement('div')
+      divRow.className = 'row'
+
+      const divPic = document.createElement('div')
+      divPic.className = 'row__pic'
+
+      const img = document.createElement('img')
+      img.src = art.img
+
+      const divDesc = document.createElement('div')
+      divDesc.className = 'row__description'
+      divDesc.innerHTML = art.title
+
+      const quantityContainer = document.createElement('div')
+      quantityContainer.classList.add('quantity-container')
+
+      const quantityInput = document.createElement('input')
+      quantityInput.classList.add('cart-containter__qnty')
+      quantityInput.setAttribute('value', art.quantity)
+      quantityInput.setAttribute('readonly', true)
+
+      quantityContainer.appendChild(quantityInput)
+
+      const divPartialAmount = document.createElement('div')
+      divPartialAmount.className = 'row__partial-amount'
+      divPartialAmount.innerHTML = formatCurrency(art.quantity * art.price)
+
+      divPic.appendChild(img)
+      divRow.appendChild(divPic)
+      divRow.appendChild(divDesc)
+      divRow.appendChild(quantityContainer)
+      divRow.appendChild(divPartialAmount)
+
+      artsContainer.appendChild(divRow)
+    })
+
+    orderContainer.appendChild(artsContainer)
+    orderSection.appendChild(orderContainer)
+  })
+}
 
 let image = document.getElementById("routeImageArt")
 image.addEventListener("change", (evt) => {
@@ -240,7 +356,7 @@ function cleanArtForm() {
   let artID = document.getElementsByName("artID")[0]
   let title = document.getElementsByName("title")[0]
   let img = document.getElementById("artPic")
-  let imgFile =document.getElementById("routeImageArt")
+  let imgFile = document.getElementById("routeImageArt")
   let artDescription = document.getElementsByName("description")[0]
   let price = document.getElementsByName("price")[0]
   let artDate = document.getElementsByName("date")[0]
@@ -293,7 +409,7 @@ form.addEventListener("submit", async (event) => {
   event.preventDefault()
   const formData = new FormData(event.target)
 
-console.log(formData)
+  console.log(formData)
   try {
     if (editArticulo === true) {
       const editProd = await callApiPrivate(`/product/${editArticuloID}`, "put", formData)
@@ -366,7 +482,7 @@ function deleteArt(id) {
   }, () => {
   })
 
-  
+
 }
 
 
@@ -474,49 +590,57 @@ function addUsers(users) {
 
 
 const searchButtonOrder = document.getElementById("search-button-order")
-searchButtonOrder.addEventListener("click", async (evt)=>{
+searchButtonOrder.addEventListener("click", async (evt) => {
   var mail = document.getElementById("search-input").value
   cargarOrdenesUsuarios(mail)
 })
 
 
-function viewDetail(id){
+function viewDetail(id) {
   let detail = document.getElementById(`artsOrder${id}`)
   let btn = document.getElementById(`viewDetail${id}`)
 
-  if(detail.style.display === 'none'){
+  if (detail.style.display === 'none') {
     detail.style.display = 'flex'
     btn.innerHTML = "Ocultar Detalle"
-  }else{
+  } else {
     detail.style.display = 'none'
     btn.innerHTML = "Ver Detalle"
   }
 }
 
-async function cargarOrdenesUsuarios(mail){
-  let consulta = await callApiPrivate(`/api/order/getuser/${mail}`,'get')
+async function cargarOrdenesUsuarios(mail) {
+  let consulta = await callApiPrivate(`/api/order/getuser/${mail}`, 'get')
   renderOrders(consulta.orders)
   openTab("", 'tab3')
 }
 
-/* //funcion para cargar renderisar usuarios segun termino de busqueda
+//funcion para cargar renderisar usuarios segun termino de busqueda
 let searchButtonUsr = document.getElementById("search-button-user")
-searchButtonUsr.addEventListener("click", (evt) => {
-  //recargo los usuarios del LocalStorage
-  users = JSON.parse(localStorage.getItem("users")) || []
+searchButtonUsr.addEventListener("click", async (evt) => {
 
-  usrSearchFilter.splice(0) //elimino todos los elementos del array
+  const busqueda = document.getElementById("search-input-user").value
+  let resultado = document.getElementById("listUsr").innerHTML
 
-  let searchInputUsr = document.getElementById("search-input-user").value.toLowerCase()
-
-  users.forEach((usr) => {
-    if (usr.name.toLowerCase().includes(searchInputUsr)) {
-      usrSearchFilter.push(usr)
+  if (busqueda) {
+    try {
+      usrSearchFilter = await callApiPrivate(`api/user/${busqueda}`, 'get')
+    } catch (error) {
+      console.log("ERRRRROOROROORORR")
+      resultado = 'No se encontraron usuarios con el termino de busqueda'
     }
-  })
+  } else {
+    obtenerTodosLosUsers()
+  }
 
-  addUsers(usrSearchFilter)
-}) */
+  if (usrSearchFilter.users) {
+    addUsers(usrSearchFilter.users)
+  } else {
+    resultado = 'No se encontraron usuarios con el termino de busqueda'
+  }
+
+
+})
 
 
 //Funcion para eliminar usuarios
@@ -727,8 +851,7 @@ function hideModalOrder() {
 }
 
 
-
-async function editOrder(id){
+async function editOrder(id) {
   modalOrder.style.display = "flex"
   modalOrder.style.animation = "drop-modal 0.3s ease-out forwards"
 
@@ -737,43 +860,44 @@ async function editOrder(id){
 }
 
 
+
 const formOrder = document.getElementById("order-form")
-formOrder.addEventListener("submit", async (evt)=>{
+formOrder.addEventListener("submit", async (evt) => {
   evt.preventDefault()
   const elements = evt.target.elements
 
-if(elements.orderStatus.value === 'ELIMINAR'){
-  showQuestion("Quiere borrar la orden", `${elements.idOrder.value} `, async () => {
+  if (elements.orderStatus.value === 'ELIMINAR') {
+    showQuestion("Quiere borrar la orden", `${elements.idOrder.value} `, async () => {
       try {
         let order = await callApiPrivate(`/api/order/delete/${elements.idOrder.value}`, 'delete')
-          showAlert(`${order.title}`, order, "sus")
-          hideModalOrder()
-          getAllOrders()
+        showAlert(`${order.title}`, order, "sus")
+        hideModalOrder()
+        getAllOrders()
       } catch (error) {
         console.log(error)
         showAlert("Error al eliminar la orden", `${error.response.data}`, "err")
       }
-  }, () => {
-  })
+    }, () => {
+    })
 
-}else{
-  try {
-    obj = {
-      id:elements.idOrder.value,
-      status:elements.orderStatus.value,
+  } else {
+    try {
+      obj = {
+        id: elements.idOrder.value,
+        status: elements.orderStatus.value,
+      }
+      let order = await callApiPrivate('/api/order/status', 'put', obj)
+      showAlert("Editar orden", order.msg, "sus")
+      hideModalOrder()
+      getAllOrders()
+    } catch (err) {
+      showAlert("Editar orden ERROR", err, "err")
     }
-    let order = await callApiPrivate('/api/order/status', 'put',obj)
-    showAlert("Editar orden", order.msg, "sus")
-    hideModalOrder()
-    getAllOrders()
-  } catch (err) {
-    showAlert("Editar orden ERROR", err, "err")
   }
-}
 
 
-  
 
 
-  
+
+
 })

@@ -1,6 +1,6 @@
 const app = require('./app');
 const port = 4001
-const dbURL = `mongodb+srv://admin:Qs28dHsu8b4Ibhd4@db-1.0oj9boi.mongodb.net/`
+const dbURL = 'mongodb+srv://admin:Qs28dHsu8b4Ibhd4@db-1.0oj9boi.mongodb.net/'
 
 const mongoose = require('mongoose') 
 

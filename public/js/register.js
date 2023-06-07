@@ -10,7 +10,7 @@ registerForm.addEventListener('submit', async (event) => {
             name: elements.name.value,
             mail: elements.mail.value,
             pass: elements.password1.value,
-            avatar: '/assets/img/avatar/avatar-default.png',
+            img: 'avatar-default.png',
             age: elements.age.value,
             bornDate: elements.borndate.value,
             country: elements.country.value,
