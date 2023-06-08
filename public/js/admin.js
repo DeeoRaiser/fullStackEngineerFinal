@@ -7,7 +7,6 @@ let users = []
 
 var editArticulo = false
 var editArticuloID = ""
-var editUser = false
 artSearchFilter = arts
 
 var artSearchFilter = [] //Array donde se gurdan los articulos del termino de busqueda
@@ -75,7 +74,8 @@ function renderOrders(orders) {
 
 
   orders.forEach(order => {
-    const orderContainer = document.createElement('div')
+    if (order){
+      const orderContainer = document.createElement('div')
     orderContainer.className = 'order-container'
 
     // Header, idOrder y estado
@@ -173,6 +173,7 @@ function renderOrders(orders) {
 
     orderContainer.appendChild(artsContainer)
     orderSection.appendChild(orderContainer)
+    }
   })
 }
 
@@ -188,7 +189,9 @@ image.addEventListener("change", (evt) => {
 //#region ARTICULOS TAB1
 
 const modalArt = document.getElementById("modalArt")
-const modalUsers = document.getElementById("modalUser")
+const modalUser = document.getElementById("modalUser")
+const modalUserRole = document.getElementById("modalUserRole")
+
 const modalOrder = document.getElementById("modalOrder")
 
 //ORDER DE ARTICULOS
@@ -386,12 +389,23 @@ closeModal0.addEventListener("click", (event) => {
   editingArt(false)
   hideModalArt()
 })
+
+//Modal Edit User
+let closeModal2 = document.getElementById("close2")
+closeModal2.addEventListener("click", (event) => {
+  hideModalUserRole()
+})
+//cancelar el editado del role del usuario
+let buttonCancelUserRoll = document.getElementById("user-cancel")
+buttonCancelUserRoll.addEventListener("click", (event) => {
+  hideModalUserRole()
+})
+
 //Modal Order
 let closeModal1 = document.getElementById("close1")
 closeModal1.addEventListener("click", (event) => {
   hideModalOrder()
 })
-
 
 
 //Cierra el modal ARTICULOS
@@ -401,6 +415,14 @@ function hideModalArt() {
     modalArt.style.display = "none"
   }, 300)
   modalArt.style.animation = "hide-modal 0.3s ease-out forwards"
+}
+
+function hideModalUserRole() {
+  setTimeout(() => {
+    modalUserRole.style = ""
+    modalUserRole.style.display = "none"
+  }, 300)
+  modalUserRole.style.animation = "hide-modal 0.3s ease-out forwards"
 }
 
 //Formulario para cargar Articulo
@@ -445,8 +467,9 @@ function editingArt(bool) {
   } else {
     image.required = true
   }
-
 }
+
+
 
 
 //#endregion MODAL ARTICULO
@@ -541,12 +564,12 @@ function addUsers(users) {
     const editButton = document.createElement('button')
     editButton.classList.add('btn', 'buttons-containter__edit')
     editButton.innerHTML = '<i class="fa-solid fa-pen"></i> Editar'
-    editButton.setAttribute('onclick', `editUser(${usr._id})`)
+    editButton.setAttribute('onclick', `editUserRole('${usr._id}')`)
 
     const deleteButton = document.createElement('button')
     deleteButton.classList.add('btn', 'buttons-containter__delete')
     deleteButton.innerHTML = '<i class="fa-solid fa-trash-can"></i> Borrar'
-    deleteButton.setAttribute('onclick', `deleteUser("${usr._id}")`)
+    deleteButton.setAttribute('onclick', `deleteUser('${usr._id}')`)
 
     /* const wishButton = document.createElement('button')
     wishButton.classList.add('btn', 'buttons-containter__wishlist')
@@ -666,7 +689,7 @@ async function deleteUser(id) {
 
 let registerCancel = document.getElementById("register-submit")
 registerCancel.addEventListener("click", (evt) => {
-  modalUsers.style.display = "none"
+  modalUser.style.display = "none"
 })
 
 let newusr = document.getElementById("new-usr")
@@ -675,9 +698,7 @@ newusr.addEventListener("click", (evt) => {
   for (let i = 0; i < formulario.elements.length - 3; i++) {
     formulario.elements[i].value = '';
   }
-
-  let modal = document.getElementById("modalUser")
-  modal.style.display = "flex"
+  modalUser.style.display = "flex"
 })
 
 const registerFormAdm = document.getElementById("register-form-adm")
@@ -854,15 +875,12 @@ function hideModalOrder() {
 async function editOrder(id) {
   modalOrder.style.display = "flex"
   modalOrder.style.animation = "drop-modal 0.3s ease-out forwards"
-
   let idOr = document.getElementById("id-order")
   idOr.value = id
 }
-
-async function editUser(id) {
-  modalUser.style.display = "flex"
-  modalUser.style.animation = "drop-modal 0.3s ease-out forwards"
-
+function editUserRole(id) {
+  modalUserRole.style.display = "flex"
+  modalUserRole.style.animation = "drop-modal 0.3s ease-out forwards"
   let idUsr = document.getElementById("id-user")
   idUsr.value = id
 }
@@ -873,7 +891,6 @@ const formOrder = document.getElementById("order-form")
 formOrder.addEventListener("submit", async (evt) => {
 evt.preventDefault()
 const elements = evt.target.elements
-
 
   if (elements.orderStatus.value === 'ELIMINAR') {
     showQuestion("Quiere borrar la orden", `${elements.idOrder.value} `, async () => {
@@ -910,10 +927,17 @@ const elements = evt.target.elements
     evt.preventDefault()
     const elements = evt.target.elements 
 
-    console.log(elements)
-    let order = await callApiPrivate(`/api/user/role/${elements.idRoll.value}`, 'put')
+    let idUsr = document.getElementById("id-user")
+    let userUpdate = await callApiPrivate(`/api/user/role/${elements.userStatus.value}/${idUsr.value}`, 'put')
 
-    console.log(order)
+    if(userUpdate.msg === "Usuario actualizado correctamente"){
+      showAlert("Roll de usuario", userUpdate.msg, "sus")
+      hideModalUserRole()
+      obtenerTodosLosUsers()
+      
+    }else{
+      showAlert("ERROR", userUpdate.msg, "sus")
+    }
   })
 
 

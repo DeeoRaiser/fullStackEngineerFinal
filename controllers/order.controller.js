@@ -107,33 +107,35 @@ async function getOrderByUser(req, res) {
 //Trae todas las ordenes
 async function getOrders(req, res) {
     try {
-        const orders1 = await Order.find().lean();
+        const orders1 = await Order.find().lean()
 
         if (!orders1 || orders1.length === 0) {
-            return responseCreator(res, 404, 'No se encontraron órdenes.');
+            return responseCreator(res, 404, 'No se encontraron órdenes.')
         }
 
-        const userIds = orders1.map(order => order.userId);
-        const users = await User.find({ _id: { $in: userIds } }).lean();
+        const userIds = orders1.map(order => order.userId)
+        const users = await User.find({ _id: { $in: userIds } }).lean()
 
         const orders = orders1.map(order => {
-            let user = users.find(user => user._id.toString() === order.userId.toString());
-            console.log(user.name)
-            console.log(user.mail)
+            let user = users.find(user => user._id.toString() === order.userId.toString())
 
-            return {
-                ...order,
-                _id: order._id.toHexString(),
-                userName: user.name,
-                userEmail: user.mail
-            };
-        });
+            if(user){
+                return {
+                    ...order,
+                    _id: order._id.toHexString(),
+                    userName: user.name,
+                    userEmail: user.mail
+                }
+            }
+
+            
+        })
 
         console.log(orders);
-        return responseCreator(res, 200, 'Órdenes obtenidas correctamente', { orders });
+        return responseCreator(res, 200, 'Órdenes obtenidas correctamente', { orders })
     } catch (error) {
         console.log(error);
-        return responseCreator(res, 500, 'Error al obtener las órdenes.');
+        return responseCreator(res, 500, 'Error al obtener las órdenes.')
     }
 }
 

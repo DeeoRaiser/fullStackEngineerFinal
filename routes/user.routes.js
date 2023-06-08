@@ -19,7 +19,7 @@ router.post('/register', userController.postUser)
 router.get('/api/user/:name', jwtVerify, isAdmin, userController.getUserName)
 
 //Editar el Roll del usuario
-router.put('/api/user/role', jwtVerify, isAdmin, userController.updateRole)
+router.put('/api/user/role/:role/:idUser', jwtVerify, isAdmin, userController.updateRole)
 
 //GET - Profile
 router.get('/api/profile', jwtVerify, userController.getProfileUser)

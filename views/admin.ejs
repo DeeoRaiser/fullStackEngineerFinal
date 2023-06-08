@@ -5,9 +5,12 @@
         <%- include('partials/header') %>
             <main class="main">
                 <div class="tabButtons">
-                    <button class="tablinks" onclick="openTab(event, 'tab1')"><i class="fa-solid fa-box"></i> ABM Artículos</button>
-                    <button class="tablinks" onclick="openTab(event, 'tab2')"><i class="fa-solid fa-user"></i> ABM Usuarios</button>
-                    <button class="tablinks" onclick="openTab(event, 'tab3')"><i class="fa-solid fa-cart-shopping"></i> ABM Ordenes</button>
+                    <button class="tablinks" onclick="openTab(event, 'tab1')"><i class="fa-solid fa-box"></i> ABM
+                        Artículos</button>
+                    <button class="tablinks" onclick="openTab(event, 'tab2')"><i class="fa-solid fa-user"></i> ABM
+                        Usuarios</button>
+                    <button class="tablinks" onclick="openTab(event, 'tab3')"><i class="fa-solid fa-cart-shopping"></i>
+                        ABM Ordenes</button>
                 </div>
 
                 <div id="tab1" class="tab-art tabcontent">
@@ -469,28 +472,29 @@
 
                 <div id="tab3" class="tabcontent">
 
-                        <div class="searchOption">
-    
-                            <div class="search">
-                                <div id="search-all-orders" class="button__ok" onclick="getAllOrders()">
-                                    <i class="fa-solid fa-magnifying-glass"></i>Todas las ordenes
-                                </div>
-                                <input class="search__input" placeholder="Buscar Orden por mail de usuario" id="search-input">
-                                <div id="search-button-order" class="button__ok search__button">
-                                    <i class="fa-solid fa-magnifying-glass"></i> Buscar
-                                </div>
+                    <div class="searchOption">
+
+                        <div class="search">
+                            <div id="search-all-orders" class="button__ok" onclick="getAllOrders()">
+                                <i class="fa-solid fa-magnifying-glass"></i>Todas las ordenes
+                            </div>
+                            <input class="search__input" placeholder="Buscar Orden por mail de usuario"
+                                id="search-input">
+                            <div id="search-button-order" class="button__ok search__button">
+                                <i class="fa-solid fa-magnifying-glass"></i> Buscar
                             </div>
                         </div>
+                    </div>
 
-                        
+
                     <div id="modalOrder" class="modal">
                         <form id="order-form" class="form-container">
                             <span id="close1" class="close">&times;</span>
 
                             <div class="form-container__item">
                                 <label class="form-container__label" for="title">Order ID</label>
-                                <input id="id-order" class="form-container__input" type="text" name="idOrder"
-                                    required readonly>
+                                <input id="id-order" class="form-container__input" type="text" name="idOrder" required
+                                    readonly>
                             </div>
 
                             <div class="form-container__item">
@@ -511,38 +515,35 @@
                             </div>
                         </form>
                     </div>
-
-
-                    <div id="modalUser" class="modal">
-                        <form id="user-form" class="form-container">
-                            <span id="close2" class="close">&times;</span>
-
-                            <div class="form-container__item">
-                                <label class="form-container__label" for="title">User ID</label>
-                                <input id="id-user" class="form-container__input" type="text" name="idUser"
-                                    required readonly>
-                            </div>
-
-                            <div class="form-container__item">
-                                <label class="form-container__label" for="order-state">Nuevo Roll</label>
-                                <select id="user-state" name="userStatus" class="form-container__input" required>
-                                    <option value="ADMIN_ROLE">Admin</option>
-                                    <option value="USER_ROLE">User</option>
-                                </select>
-                            </div>
-                            <div class="submit">
-                                <input id="user-cancel" class="submit__button-cancel button__cancel" value="Cancelar"
-                                    type="button">
-                                <input id="user-submit" class="submit__button-save button__ok" value="Actualizar Usuario"
-                                    type="submit">
-                            </div>
-                        </form>
-                    </div>
-
-
                     <div id="row-order-detail" class="row-order-detail">
 
                     </div>
+                </div>
+
+                <div id="modalUserRole" class="modal">
+                    <form id="user-form" class="form-container">
+                        <span id="close2" class="close">&times;</span>
+
+                        <div class="form-container__item">
+                            <label class="form-container__label" for="title">User ID</label>
+                            <input id="id-user" class="form-container__input" type="text" name="idUser" required
+                                readonly>
+                        </div>
+
+                        <div class="form-container__item">
+                            <label class="form-container__label" for="order-state">Nuevo Roll</label>
+                            <select id="user-state" name="userStatus" class="form-container__input" required>
+                                <option value="ADMIN_ROLE">Admin</option>
+                                <option value="USER_ROLE">User</option>
+                            </select>
+                        </div>
+                        <div class="submit">
+                            <input id="user-cancel" class="submit__button-cancel button__cancel" value="Cancelar"
+                                type="button">
+                            <input id="user-submit" class="submit__button-save button__ok" value="Actualizar Usuario"
+                                type="submit">
+                        </div>
+                    </form>
                 </div>
 
 

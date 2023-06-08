@@ -231,19 +231,19 @@ async function adminPanel(req, res) {
 
 async function updateRole(req, res) {
     let data = {}
-    console.log(req.body.role)
+    console.log(req.params.idUser)
+    console.log(req.params.role)
 
     data = {
-        role: req.body.role,
+        role: req.params.role,
     }
     
     try {
-        const updatedUser = await User.findByIdAndUpdate(req.user, data, { new: true })
+        const updatedUser = await User.findByIdAndUpdate(req.params.idUser, data, { new: true })
         //TRUE:Si mi usuario se actualizo correctamente, me lo devuelve
 
         if (!updatedUser) responseCreator(res, 404, 'No se encontro el usuario')
-
-        return responseCreator(res, 200, 'Usuario actualizado correctamente', { user: updatedUser })
+        return responseCreator(res, 200, 'Usuario actualizado correctamente')
 
     } catch (error) {
         console.log(error)
